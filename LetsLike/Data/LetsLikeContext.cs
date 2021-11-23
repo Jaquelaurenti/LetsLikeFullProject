@@ -21,7 +21,7 @@ namespace LetsLike.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                   var connection = @"Server=ARKMF98769\SQLEXPRESS;Database=myDataBase;Trusted_Connection=True;";
+                   var connection = @"Server=ARKMF98769\SQLEXPRESS;Database=letLike_FullProject;Trusted_Connection=True;";
 
                     optionsBuilder.UseSqlServer(connection);
             }

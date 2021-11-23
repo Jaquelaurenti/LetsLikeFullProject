@@ -14,9 +14,13 @@ namespace LetsLike.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Column("ID_USUARIO_LIKE"), Required]
         public Usuario UsuarioLike { get; set; }
+        [ForeignKey("ID_USUARIO_LIKE")]
         public int IdUsuarioLike { get; set; }
+        [Column("ID_PROJETO_LIKE"), Required]
         public Projeto ProjetoLike { get; set; }
+        [ForeignKey("ID_PROJETO_LIKE")]
         public int IdProjetoLike { get; set; }
     }
 }

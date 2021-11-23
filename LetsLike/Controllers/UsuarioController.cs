@@ -20,13 +20,11 @@ namespace LetsLike.Controllers
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
-        private readonly LetsLikeContext _context;
 
-        public UsuarioController(IUsuarioService usuarioService, IMapper mapper, LetsLikeContext context)
+        public UsuarioController(IUsuarioService usuarioService, IMapper mapper)
         {
             _usuarioService = usuarioService;
             _mapper = mapper;
-            _context = context;
         }
 
         [HttpGet]
@@ -37,13 +35,11 @@ namespace LetsLike.Controllers
             var usuario = _usuarioService.FindAllUsuarios();
             if (usuario != null)
             {
-
                 return Ok(usuario.Select(x => _mapper.Map<Usuario>(x)).ToList());
             }
             else
                 return NotFound();
         }
-
 
         // POST api/usuario
         /// <summary>
@@ -68,7 +64,7 @@ namespace LetsLike.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<UsuarioDto> Post([FromQuery] UsuarioDto value)
+        public ActionResult<UsuarioDto> Post([FromBody] UsuarioDto value)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -77,7 +73,8 @@ namespace LetsLike.Controllers
             {
                 Nome = value.Nome,
                 Email = value.Email,
-                Senha = value.Senha
+                Username = value.Username,
+                Senha = Utils.Utils.EncryptValue(value.Senha),
             };
 
             var registryUser = _usuarioService.SaveOrUpdate(usuario);
@@ -93,7 +90,6 @@ namespace LetsLike.Controllers
                 notfound.Value = "Erro ao cadastrar Usuário!";
                 return NotFound(notfound);
             }
-
         }
     }
 }

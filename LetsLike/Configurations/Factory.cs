@@ -12,11 +12,11 @@ namespace LetsLike.Configurations
     public class Factory
     {
         public static void RegisterServices(IServiceCollection services)
-        {
-           
+        {          
             // Adicionando Services
             services.AddScoped<IUsuarioService, UsuarioService>();
-
+            services.AddScoped<IProjetoService, ProjetoService>();
+            services.AddScoped<IUsuarioLikeProjetoService, UsuarioLikeProjetoService>();
         }
     }
 }

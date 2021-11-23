@@ -9,8 +9,8 @@ namespace LetsLike.Interfaces
     public interface IUsuarioService
     {
         IList<Usuario> FindAllUsuarios();
-        Usuario FindByIdLevel(int usuarioId);
-        Usuario FindByLevelName(string nome);
         Usuario SaveOrUpdate(Usuario usuario);
+        Usuario FindByUsername(string username);
+        bool VerifyPassword(string password, int userId);
     }
 }
