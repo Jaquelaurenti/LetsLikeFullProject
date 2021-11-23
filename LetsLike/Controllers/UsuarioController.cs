@@ -27,6 +27,32 @@ namespace LetsLike.Controllers
             _mapper = mapper;
         }
 
+        // GET api/usuarios
+        /// <summary>
+        /// Retorna todos os usúarios na base
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     GET api/usuario
+        ///     { 
+        ///        "nome": "Jaque Laurenti",
+        ///        "username": "Jaque",
+        ///        "email": "jaquelaurenti@gmail.com",
+        ///        "senha": "odeiomeuchefe",
+        ///        "projetos: [
+        ///        
+        ///        ]
+        ///        "usuarioLikeProjeto":[
+        ///        
+        ///        ]
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns>Usuário inserido na base</returns>
+        /// <response code="200">Retorna os usuários cadastrados na base</response>
+        /// <response code="404">Retorna se  usuario não for encontrado</response>   
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -53,7 +79,7 @@ namespace LetsLike.Controllers
         ///        "nome": "Jaque Laurenti",
         ///        "email": "jaquelaurenti@gmail.com",
         ///        "senha": "odeiomeuchefe",
-        ///        "senha": "odeiomeuchefe"
+        ///        "confirmaSenha": "odeiomeuchefe"
         ///     }
         ///
         /// </remarks>

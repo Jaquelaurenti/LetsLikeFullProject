@@ -10,5 +10,7 @@ namespace LetsLike.Interfaces
     {
         Projeto SaveOrUpdate(Projeto projeto);
         int LikeProjeto(UsuarioLikeProjeto model);
+        IList<Projeto> GetByUsuario(int idUsuario);
+        IList<Projeto> GetAll();
     }
 }

@@ -20,12 +20,24 @@ namespace LetsLike.Services
             _usaurioProjetoService = usaurioProjetoService;
         }
 
+        public IList<Projeto> GetAll()
+        {
+            return _context.Projetos.ToList();
+        }
+
+        public IList<Projeto> GetByUsuario(int idUsuario)
+        {
+            return _context.Projetos.Where(x => x.Id.Equals(idUsuario)).ToList();
+        }
+
         public int LikeProjeto(UsuarioLikeProjeto model)
         {
             try
             {
+              
                 var projeto = _context.Projetos.Where(x => x.Id.Equals(model.IdProjetoLike)).FirstOrDefault();
                 var usuario = _context.Usuarios.Where(x => x.Id.Equals(model.IdUsuarioLike)).FirstOrDefault();
+                
 
                 if (projeto == null)
                 {
@@ -37,10 +49,19 @@ namespace LetsLike.Services
                 }
                 else
                 {
-                    _usaurioProjetoService.SaveOrUpdate(model);
-                    projeto.LikeContador = projeto.LikeContador + 1;
-                    SaveOrUpdate(projeto);
-                    return projeto.LikeContador;
+                    var verifyProjetoUsuario = _usaurioProjetoService.VerifyLike(projeto.Id, usuario.Id);
+                    if(verifyProjetoUsuario == null)
+                    {
+                        _usaurioProjetoService.SaveOrUpdate(model);
+                        projeto.LikeContador = projeto.LikeContador + 1;
+                        SaveOrUpdate(projeto);
+                        return projeto.LikeContador;
+                    }
+                    else
+                    {
+                        throw new Exception(message: "Usuário já deu like no projeto");
+                    }
+                   
                 }
             }
             catch (Exception ex)

@@ -32,5 +32,12 @@ namespace LetsLike.Services
                 throw new Exception(ex.Message);
             }  
         }
+
+        public UsuarioLikeProjeto VerifyLike(int IdProjeto, int IdUsuario)
+        {
+            var response = _context.UsuariosLikeProjetos.Where(x => x.IdProjetoLike.Equals(IdProjeto)
+            && x.IdUsuarioLike.Equals(IdUsuario)).FirstOrDefault();
+            return response;
+        }
     }
 }
