@@ -38,7 +38,11 @@ namespace LetsLike
             // TODO adicionando o json para serializar as amarrações
             services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve) ;
-            
+
+            // TODO adicionando o cors após adicionar o nugget NetCore.Cors
+            services.AddCors();
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "LetsLike", Version = "v1" });
@@ -66,6 +70,8 @@ namespace LetsLike
             }
 
             app.UseHttpsRedirection();
+            // TODO adicionando o CORS especificando a política AllowAny
+            app.UseCors(option => option.AllowAnyOrigin()); 
 
             app.UseRouting();
 

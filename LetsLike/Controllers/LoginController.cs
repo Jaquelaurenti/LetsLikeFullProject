@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LetsLike.DTO;
 using LetsLike.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,6 +14,7 @@ namespace LetsLike.Controllers
     [Produces("application/json")]
     [ApiController]
     [Route("api/[controller]")]
+    
     //[Authorize]
     public class LoginController : ControllerBase
     {
@@ -24,7 +26,6 @@ namespace LetsLike.Controllers
             _usuarioService = usuarioService;
             _mapper = mapper;
         }
-
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
