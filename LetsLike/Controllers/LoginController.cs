@@ -14,7 +14,8 @@ namespace LetsLike.Controllers
     [Produces("application/json")]
     [ApiController]
     [Route("api/[controller]")]
-    
+    [EnableCors("CorsPolicy")] // TODO add a policy Criada na Controller de forma Global, irá atingir todas as reqs desta controller
+
     //[Authorize]
     public class LoginController : ControllerBase
     {
